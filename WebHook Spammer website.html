@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuck Scammers</title>
+  <style>
+    .info-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid rgba(0, 0, 255, 0.5);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 12px;
+      color: #0000ff;
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.8);
+      opacity: 0;
+      animation: fadeInElements 1s ease-out forwards;
+      animation-delay: 7s;
+    }
+
+    body {
+      background-color: black;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      animation: fadeInBackground 0.5s ease-out forwards;
+      opacity: 0;
+      animation-delay: 0.24s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      position: relative;
+      opacity: 0;
+      animation: fadeInElements 0.5s ease-out forwards;
+      animation-delay: 2s;
+    }
+
+    .flex-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      width: 100%;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeInElements 1s ease-out forwards;
+      animation-delay: 6s;
+    }
+
+    .spammer, .deleter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      border: 2px solid rgba(0, 0, 255, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+      width: 300px;
+    }
+
+    .spammer h1, .deleter h1 {
+      color: #0000ff;
+      text-shadow: 0 0 10px rgba(0, 0, 255, 0.8);
+      font-size: 1.5em;
+    }
+
+    @keyframes rotateAndMoveUp {
+      0% { transform: rotate(0deg); top: 150px; }
+      30% { transform: rotate(45deg); top: 120px; }
+      60% { transform: rotate(-45deg); top: 90px; }
+      90% { transform: rotate(0deg); top: 60px; }
+      100% { transform: rotate(0deg); top: 30px; }
+    }
+
+    @keyframes fadeInBackground {
+      0% { background-color: black; opacity: 0; }
+      100% { background-color: black; opacity: 1; }
+    }
+
+    @keyframes fadeInElements {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .image {
+      position: relative;
+      top: 150px;
+      width: 80px;
+      height: auto;
+      animation: rotateAndMoveUp 4s ease-in-out forwards;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 255, 0.2))
+              drop-shadow(0 0 15px rgba(0, 0, 255, 0.15))
+              drop-shadow(0 0 20px rgba(0, 0, 255, 0.1));
+    }
+
+    .text {
+      font-size: 20px;
+      color: white;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeInText 1s ease-out forwards;
+      animation-delay: 3s;
+      text-shadow: 0 0 5px rgba(0, 0, 255, 0.5),
+                   0 0 10px rgba(0, 0, 255, 0.4),
+                   0 0 15px rgba(0, 0, 255, 0.3);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInText 1s ease-out forwards;
+      animation-delay: 5s;
+      text-shadow: 0 0 5px rgba(0, 0, 255, 0.5),
+                   0 0 10px rgba(0, 0, 255, 0.4),
+                   0 0 15px rgba(0, 0, 255, 0.3);
+    }
+
+    footer a {
+      color: #0000ff;
+      text-decoration: none;
+    }
+
+    .audio-button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="url"],
+    input[type="text"] {
+      width: 250px;
+      padding: 8px;
+      border: 2px solid rgba(0, 0, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 0, 255, 0.1);
+      color: white;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+
+    input:focus {
+      border: 2px solid #0000ff;
+      box-shadow: 0 0 8px #0000ff;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 2px solid #0000ff;
+      border-radius: 5px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      background: rgba(0, 0, 255, 0.3);
+      box-shadow: 0 0 10px #0000ff;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    a {
+      color: blue;
+    }
+
+    a:hover {
+      color: deepskyblue;
+    }
+
+    /* Loading bar styles */
+    .loading-bar-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      background-color: #555;
+      border-radius: 20px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .loading-bar {
+      width: 0;
+      height: 20px;
+      background-color: #0000ff;
+      border-radius: 10px;
+      transition: width 5s ease-in-out;
+    }
+
+    .loading-text {
+      margin-top: 10px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="audio-button" onclick="toggleMusic()"></button>
+  </div>
+
+  <div class="text">Welcome User!</div>
+
+  <div class="flex-wrapper">
+    <div class="spammer">
+      <h1>Webhook Spammer</h1>
+      <input type="url" id="webhookurl" value="" placeholder="Enter webhook URL">
+      <input type="text" id="username" value="" placeholder="Enter username">
+      <input type="text" id="message" value="" placeholder="Enter message">
+      <button id="spammerBtn" onclick="toggle()">Unlimited Spam: OFF</button>
+      <h2 style="font-size: 16px; color: #0000ff; text-shadow: 0 0 5px rgba(0, 0, 255, 0.8);">
+        Refresh to stop Spamming!
+      </h2>
+    </div>
+
+    <div class="deleter">
+      <h1>Webhook Deleter</h1>
+      <input type="url" name="deleteurl" id="deleteurl" value="" placeholder="Enter webhook URL">
+      <button id="deleterBtn" onclick="deleteWebhook()">Delete Webhook</button>
+    </div>
+  </div>
+
+  <!-- Loading bar -->
+  <div class="loading-bar-container" id="loadingBarContainer">
+    <div class="loading-bar" id="loadingBar"></div>
+    <div class="loading-text" id="loadingText">Loading...</div>
+  </div>
+
+  <footer>
+    <p>Fuck Scammers</a></p>
+  </footer>
+
+  <div class="info-box" id="infoBox">
+    <p><strong>Random Facts:</strong></p>
+    <p id="infoText">Octopuses have three hearts.</p>
+  </div>
+  
+<script src="./Fuck Scammers_files/jquery-3.6.0.min.js.download"></script>
+  <script>
+    const facts = [
+      "A webhook is like an automated messenger between apps!",
+	  "This was not my code I just changed it, in other words skidded credits to owner (idk who)!",
+      "Ice bears are black underneath their white fur.",
+      "The first webcam watched a coffee pot.",
+      "Honey never spoils.",
+      "Bananas are berries, but strawberries aren’t.",
+      "Octopuses have three hearts.",
+      "Cows have best friends and get stressed when separated.",
+      "There are more stars in the universe than grains of sand on Earth.",
+      "A group of flamingos is called a 'flamboyance'.",
+      "Scotland's national animal is the unicorn.",
+      "A day on Venus is longer than a year on Venus.",
+      "Sharks existed before trees.",
+      "Butterflies can taste with their feet.",
+      "There’s a species of jellyfish that is biologically immortal.",
+      "A single spaghetti noodle is called a 'spaghetto'.",
+      "You can't hum while holding your nose.",
+      "The Eiffel Tower can be 15 cm taller in the summer due to heat expansion.",
+      "Wombat poop is cube-shaped.",
+      "The inventor of the frisbee was turned into a frisbee after he died.",
+      "An octopus has nine brains.",
+      "Sloths can hold their breath longer than dolphins.",
+      "Water makes different pouring sounds depending on temperature.",
+      "There's a town in Norway called 'Hell'.",
+      "The human body contains enough iron to make a small nail.",
+      "Hot water freezes faster than cold water.",
+      "A bolt of lightning is five times hotter than the surface of the sun.",
+      "Cats can’t taste sweetness.",
+      "There are more fake flamingos in the world than real ones.",
+      "Mosquitoes are attracted to people who just ate bananas.",
+      "A shrimp’s heart is in its head.",
+      "There’s a species of fungus that turns ants into zombies.",
+      "Walt Disney was afraid of mice.",
+      "It rains diamonds on Jupiter and Saturn.",
+      "The world’s largest desert is Antarctica.",
+      "There's a McDonald's on every continent except Antarctica.",
+      "A jellyfish’s body is 95% water.",
+      "Cows have accents.",
+      "The world's oldest piece of chewing gum is over 9,000 years old.",
+      "Koalas have fingerprints almost identical to humans.",
+      "There's an island in Japan that’s overrun by bunnies.",
+      "The inventor of the telephone, Alexander Graham Bell, wanted people to answer with 'Ahoy!'",
+      "Some turtles can breathe through their butts.",
+      "You share 60% of your DNA with bananas.",
+      "Ants never sleep.",
+      "A group of crows is called a 'murder'.",
+      "Goldfish have a memory span of months, not seconds.",
+      "A crocodile can't stick out its tongue.",
+      "Your fingernails grow faster on your dominant hand.",
+      "If you lift a kangaroo’s tail off the ground, it can’t hop.",
+      "A duck’s quack doesn’t echo, and scientists aren’t sure why.",
+      "The M’s in M&M’s stand for 'Mars' and 'Murrie'.",
+      "A newborn kangaroo is the size of a jellybean.",
+      "The inventor of the Pringles can is buried in one.",
+      "Penguins propose to their mates with pebbles.",
+      "There's a lake in Australia that stays bright pink.",
+      "A bolt of lightning is six times hotter than the sun.",
+      "Some sea cucumbers breathe through their butt.",
+      "More people have been to the moon than to the Mariana Trench.",
+      "The heart of a blue whale is the size of a small car.",
+      "A day on Mars is 24 hours and 37 minutes long.",
+      "The world's largest snowflake was 15 inches wide.",
+      "A group of porcupines is called a 'prickle'.",
+      "Pineapples take about two years to grow.",
+      "The dot over the letter 'i' is called a 'tittle'.",
+      "A flea can jump 350 times its body length.",
+      "There's a fish that can climb trees.",
+      "Some jellyfish glow in the dark.",
+      "Dogs' noses are unique, like human fingerprints.",
+      "There’s a city in Turkey named 'Batman'.",
+      "The longest hiccuping spree lasted 68 years.",
+      "The average cloud weighs about a million pounds.",
+      "More people are killed by vending machines than sharks.",
+      "There are more chickens on Earth than people.",
+      "A bolt of lightning can reach temperatures of 30,000 Kelvin.",
+      "An astronaut’s height can increase by two inches in space.",
+      "The moon has 'moonquakes' just like Earth has earthquakes.",
+      "Dolphins have names for each other.",
+      "Bees recognize human faces.",
+      "A snail can sleep for three years.",
+      "The average person walks the equivalent of five times around the Earth in a lifetime.",
+      "A mantis shrimp can punch with the force of a bullet.",
+      "There's a species of fish that can produce electricity.",
+      "A strawberry isn’t a berry, but an avocado is.",
+      "Rabbits can see behind them without turning their heads.",
+      "A jiffy is an actual unit of time.",
+      "Tomatoes were once thought to be poisonous.",
+      "Some frogs can freeze solid in winter and thaw back to life.",
+      "There's a bird that sleeps while flying.",
+      "Giraffes only need 5 to 30 minutes of sleep per day.",
+      "There's a hotel in Sweden made entirely of ice.",
+      "An owl's eyes are tube-shaped, not spherical.",
+      "A pig’s orgasm lasts for 30 minutes.",
+      "Venus is the only planet that rotates clockwise.",
+      "More people speak Klingon than some real languages.",
+      "An ant can carry 50 times its body weight.",
+      "Cats have fewer toes on their back paws.",
+      "Humans have jumped further on the moon than on Earth.",
+      "A rat can laugh when tickled.",
+      "A single teaspoon of honey represents the life work of 12 bees.",
+      "Your brain generates enough electricity to power a light bulb.",
+      "Elephants can 'hear' with their feet.",
+      "The smell after rain is caused by bacteria in the soil.",
+      "There is a species of lizard that can squirt blood from its eyes.",
+      "A starfish can regrow an entire arm.",
+      "There's a parasite that replaces a fish's tongue with its own body.",
+      "Pineapple was once so expensive, people rented them as status symbols."
+    ];
+    const randomFact = facts[Math.floor(Math.random() * facts.length)];
+    document.getElementById("infoText").textContent = randomFact;
+
+    let spamInterval = null;
+
+    function sending() {
+      const webhookURL = document.getElementById("webhookurl").value;
+      const username = document.getElementById("username").value;
+      const avatar = document.getElementById("avatar").value;
+      const message = document.getElementById("message").value;
+
+      const request = new XMLHttpRequest();
+      request.open("POST", webhookURL);
+      request.setRequestHeader("Content-Type", "application/json");
+
+      const params = {
+        username: username,
+        avatar_url: avatar,
+        content: message,
+      };
+
+      request.send(JSON.stringify(params));
+    }
+
+    function toggle() {
+      const spammerBtn = document.getElementById("spammerBtn");
+      if (!spamInterval) {
+        spamInterval = setInterval(sending, 1000);
+        spammerBtn.textContent = "Unlimited Spam: ON";
+      } else {
+        clearInterval(spamInterval);
+        spamInterval = null;
+        spammerBtn.textContent = "Unlimited Spam: OFF";
+      }
+    }
+
+    function deleteWebhook() {
+      const deleteurl = document.getElementById("deleteurl").value;
+      $.ajax({
+        type: "DELETE",
+        url: deleteurl,
+        success: function () {
+          alert("Webhook deleted successfully!");
+        },
+        error: function () {
+          alert("Failed to delete webhook. Check the URL.");
+        },
+      });
+    }
+  </script>
+
+  <script>
+    let isSpamming = false;
+
+    function toggle() {
+      isSpamming = !isSpamming;
+      document.getElementById("spammerBtn").innerText = isSpamming ? "Unlimited Spam: ON" : "Unlimited Spam: OFF";
+    }
+
+    function deleteWebhook() {
+      alert("Webhook deleted!");
+    }
+
+    function toggleMusic() {
+      alert("Music toggled!");
+    }
+
+    // Show loading bar and set it to fill in 5 seconds
+    window.onload = function() {
+      const loadingBar = document.getElementById('loadingBar');
+      const loadingText = document.getElementById('loadingText');
+      const loadingBarContainer = document.getElementById('loadingBarContainer');
+
+      setTimeout(() => {
+        loadingBar.style.width = '100%';
+        loadingText.innerText = 'Loaded!';
+      }, 1000); // Start the loading after 1 second
+
+      setTimeout(() => {
+        loadingBarContainer.style.display = 'none'; // Hide the loading bar after 5 seconds
+      }, 6000); // 5 seconds after the load
+    };
+  </script>
+</body>
+</html>
